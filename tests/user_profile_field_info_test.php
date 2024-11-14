@@ -140,12 +140,10 @@ class user_profile_field_info_test extends advanced_testcase {
             $new_user->id
         );
 
-        self::assertLessThanOrEqual(
-            0,
+        self::assertEmpty(
             $new_user_fields['merge_date']->data
         );
-        self::assertStringContainsString(
-            $old_user->username,
+        self::assertEmpty(
             $new_user_fields['merge_info']->data
         );
     }

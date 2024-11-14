@@ -60,14 +60,7 @@ class user_profile_field_info {
                 time()
             );
 
-            self::add_merge_info(
-                $new_user_id,
-                get_string(
-                    'userfieldmergefrom',
-                    'tool_mergeusers',
-                    $info
-                )
-            );
+            self::clear_merge_info($new_user_id);
 
         } catch (\Exception $e) {
             // Do nothing
@@ -101,6 +94,14 @@ class user_profile_field_info {
             $fields['merge_date'] = $time;
         }
 
+        profile_save_custom_fields($user_id, $fields);
+    }
+
+    private static function clear_merge_info(int $user_id): void {
+        $fields = [
+            'merge_info' => '',
+            'merge_date' => null
+        ];
         profile_save_custom_fields($user_id, $fields);
     }
 
